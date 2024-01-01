@@ -30,13 +30,11 @@ const run = async () => {
   const calibrateBtn = document.createElement("button");
   calibrateBtn.textContent = calibrateText;
   appEl.append(calibrateBtn);
-  const updateGraphToggleLabel = document.createElement("input");
+  const updateGraphToggleLabel = document.createElement("label");
   updateGraphToggleLabel.style.display = "block";
   updateGraphToggleLabel.innerHTML = html`
-    <label>
-      <span>Keep graph updated</span>
-      <input type="checkbox"></input>
-    </label>
+    <span>Keep graph updated</span>
+    <input type="checkbox"></input>
   `;
   const updateGraphToggle = updateGraphToggleLabel.querySelector("input")!;
   appEl.append(updateGraphToggleLabel);
