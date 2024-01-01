@@ -110,9 +110,7 @@ const run = async () => {
 
 const round = (input: number) => Math.round(input * 100) / 100;
 
-try {
-  await run();
-} catch (e) {
+run().catch((e) => {
   console.log(e);
   msgEl.textContent = String(e);
-}
+});
