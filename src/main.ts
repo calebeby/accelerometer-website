@@ -30,6 +30,16 @@ const run = async () => {
   const calibrateBtn = document.createElement("button");
   calibrateBtn.textContent = calibrateText;
   appEl.append(calibrateBtn);
+  const updateGraphToggleLabel = document.createElement("input");
+  updateGraphToggleLabel.style.display = "block";
+  updateGraphToggleLabel.innerHTML = html`
+    <label>
+      <span>Keep graph updated</span>
+      <input type="checkbox"></input>
+    </label>
+  `;
+  const updateGraphToggle = updateGraphToggleLabel.querySelector("input")!;
+  appEl.append(updateGraphToggleLabel);
   const xVelo = createRange();
   const yVelo = createRange();
   const zVelo = createRange();
@@ -101,7 +111,8 @@ const run = async () => {
       };
       msgEl.innerHTML = html`<pre>${JSON.stringify(vals, null, 2)}</pre>`;
       dataset.push({ timestamp, velocity: velo, acceleration: accel });
-      makePlots(appEl, dataset);
+      const updateGraph = updateGraphToggle.checked;
+      makePlots(appEl, updateGraph, dataset);
     }
     lastTimestamp = timestamp;
   });

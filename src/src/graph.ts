@@ -16,27 +16,33 @@ const findOrMakeEl = (id: string, app: Element) => {
   return el;
 };
 
-export const makePlots = (app: Element, data: DataPoint[]) => {
-  const box = findOrMakeEl("chart-1", app);
-  box.innerHTML = "";
-  box.append(
-    Plot.plot({
-      marks: [
-        Plot.ruleY([0]),
-        Plot.lineY(data, {
-          x: {
-            value: (d: DataPoint) => (d.timestamp - data[0].timestamp) / 1000,
-            label: "Timestamp (s)",
-          },
-          y: {
-            value: (d: DataPoint) => d.velocity.y,
-            label: "Velocity Y-component (m/s)",
-          },
-        }),
-        Plot.frame(),
-      ],
-    }),
-  );
+export const makePlots = (
+  app: Element,
+  updateGraph: boolean,
+  data: DataPoint[],
+) => {
+  if (updateGraph) {
+    const box = findOrMakeEl("chart-1", app);
+    box.innerHTML = "";
+    box.append(
+      Plot.plot({
+        marks: [
+          Plot.ruleY([0]),
+          Plot.lineY(data, {
+            x: {
+              value: (d: DataPoint) => (d.timestamp - data[0].timestamp) / 1000,
+              label: "Timestamp (s)",
+            },
+            y: {
+              value: (d: DataPoint) => d.velocity.y,
+              label: "Velocity Y-component (m/s)",
+            },
+          }),
+          Plot.frame(),
+        ],
+      }),
+    );
+  }
   const infoEl = findOrMakeEl("chart-info", app);
   infoEl.innerHTML = html`
     <h1>

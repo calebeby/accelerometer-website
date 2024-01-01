@@ -11,7 +11,9 @@
   "devDependencies": {
     "@observablehq/plot": "^0.6.13",
     "@types/w3c-generic-sensor": "^1.0.9",
+    "prettier": "^3.1.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
-  }
+  },
+  "prettier": {}
 }
