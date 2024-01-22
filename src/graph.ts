@@ -34,8 +34,8 @@ export const makePlots = (
               label: "Timestamp (s)",
             },
             y: {
-              value: (d: DataPoint) => d.velocity.y,
-              label: "Velocity Y-component (m/s)",
+              value: (d: DataPoint) => d.velocity.magnitude(),
+              label: "Velocity in X (m/s)",
             },
           }),
           Plot.frame(),
@@ -54,8 +54,8 @@ export const makePlots = (
               label: "Timestamp (s)",
             },
             y: {
-              value: (d: DataPoint) => d.acceleration.y,
-              label: "Acceleration Y-component (m/s^2)",
+              value: (d: DataPoint) => d.acceleration.x,
+              label: "Acceleration in X (m/s²)",
             },
           }),
           Plot.frame(),
@@ -66,12 +66,12 @@ export const makePlots = (
   const infoEl = findOrMakeEl("chart-info", app);
   infoEl.innerHTML = html`
     <h1>
-      Max y-component of velocity:
-      ${round(Math.max(...data.map((d) => d.velocity.y)))} m/s
+      Max x-component of velocity:
+      ${round(Math.max(...data.map((d) => d.velocity.x)))} m/s
     </h1>
     <h1>
-      Max y-component of acceleration:
-      ${round(Math.max(...data.map((d) => d.acceleration.y)))} m/s²
+      Max x-component of acceleration:
+      ${round(Math.max(...data.map((d) => d.acceleration.x)))} m/s²
     </h1>
   `;
 };
