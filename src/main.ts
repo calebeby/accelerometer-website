@@ -1,5 +1,5 @@
 import { getAccel } from "./sensor";
-import { DataPoint, Vector3, makePlots } from "./src/graph";
+import { DataPoint, Vector3, makePlots } from "./graph";
 import "./style.css";
 
 const html = String.raw;
