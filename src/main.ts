@@ -99,7 +99,11 @@ const run = async () => {
       zVelo.valueAsNumber = velo.z;
       const velocityMagnitude = velo.magnitude();
       const vals = {
-        accel,
+        accel: {
+          x: round(accel.x),
+          y: round(accel.y),
+          z: round(accel.z),
+        },
         velo: {
           x: round(velo.x),
           y: round(velo.y),
