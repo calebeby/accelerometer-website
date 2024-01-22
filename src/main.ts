@@ -24,6 +24,12 @@ const createRange = () => {
 };
 
 const run = async () => {
+  try {
+    const wakeLock = await navigator.wakeLock.request("screen");
+  } catch (e) {
+    msgEl.textContent += String(e);
+  }
+
   let lastTimestamp: number | undefined = undefined;
   let calibrationOffset = { x: 0, y: 0, z: 0 };
   const accelerometer = await getAccel();
@@ -121,5 +127,5 @@ const round = (input: number) => Math.round(input * 100) / 100;
 
 run().catch((e) => {
   console.log(e);
-  msgEl.textContent = String(e);
+  msgEl.textContent += String(e);
 });
