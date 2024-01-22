@@ -35,12 +35,6 @@ const run = async () => {
         wakelock.release();
       }
     });
-    setInterval(() => {
-      msgEl.textContent += `wake lock active? ${wakelock.released}`;
-    }, 2000);
-    wakelock.addEventListener("release", () => {
-      msgEl.textContent += "Wake Lock has been released";
-    });
   } catch (e) {
     msgEl.textContent += String(e);
   }
