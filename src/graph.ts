@@ -67,14 +67,16 @@ export const makePlots = (
   infoEl.innerHTML = html`
     <h1>
       Max y-component of velocity (m/s):
-      ${Math.max(...data.map((d) => d.velocity.y))}
+      ${round(Math.max(...data.map((d) => d.velocity.y)))}
     </h1>
     <h1>
       Max y-component of acceleration (m/s^2):
-      ${Math.max(...data.map((d) => d.acceleration.y))}
+      ${round(Math.max(...data.map((d) => d.acceleration.y)))}
     </h1>
   `;
 };
+
+const round = (input: number) => Math.round(input * 100) / 100;
 
 export class Vector3 {
   public x = 0;
