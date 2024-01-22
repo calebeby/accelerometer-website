@@ -27,7 +27,17 @@ const createRange = () => {
 
 const run = async () => {
   try {
-    const wakelock = await navigator.wakeLock.request("screen");
+    let wakelock = await navigator.wakeLock.request("screen");
+    document.addEventListener("visibilitychange", async () => {
+      if (document.visibilityState === "visible") {
+        wakelock = await navigator.wakeLock.request("screen");
+      } else {
+        wakelock.release();
+      }
+    });
+    setInterval(() => {
+      msgEl.textContent += `wake lock active? ${wakelock.released}`;
+    });
     wakelock.addEventListener("release", () => {
       msgEl.textContent += "Wake Lock has been released";
     });
