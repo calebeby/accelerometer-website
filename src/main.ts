@@ -7,6 +7,8 @@ const html = String.raw;
 const appEl = document.querySelector<HTMLDivElement>("#app")!;
 const msgEl = document.createElement("div");
 appEl.append(msgEl);
+const dataEl = document.createElement("div");
+appEl.append(dataEl);
 
 const calibrateText = "calibrate";
 
@@ -25,7 +27,10 @@ const createRange = () => {
 
 const run = async () => {
   try {
-    await navigator.wakeLock.request("screen");
+    const wakelock = await navigator.wakeLock.request("screen");
+    wakelock.addEventListener("release", () => {
+      msgEl.textContent += "Wake Lock has been released";
+    });
   } catch (e) {
     msgEl.textContent += String(e);
   }
@@ -117,7 +122,7 @@ const run = async () => {
         velocityMagnitude: round(velocityMagnitude),
         dt: round(dt),
       };
-      msgEl.innerHTML = html`<pre>${JSON.stringify(vals, null, 2)}</pre>`;
+      dataEl.innerHTML = html`<pre>${JSON.stringify(vals, null, 2)}</pre>`;
       dataset.push({ timestamp, velocity: velo, acceleration: accel });
       const updateGraph = updateGraphToggle.checked;
       makePlots(appEl, updateGraph, dataset);
