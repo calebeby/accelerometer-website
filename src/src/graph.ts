@@ -42,12 +42,36 @@ export const makePlots = (
         ],
       }),
     );
+    const box2 = findOrMakeEl("chart-2", app);
+    box2.innerHTML = "";
+    box2.append(
+      Plot.plot({
+        marks: [
+          Plot.ruleY([0]),
+          Plot.lineY(data, {
+            x: {
+              value: (d: DataPoint) => (d.timestamp - data[0].timestamp) / 1000,
+              label: "Timestamp (s)",
+            },
+            y: {
+              value: (d: DataPoint) => d.acceleration.y,
+              label: "Acceleration Y-component (m/s^2)",
+            },
+          }),
+          Plot.frame(),
+        ],
+      }),
+    );
   }
   const infoEl = findOrMakeEl("chart-info", app);
   infoEl.innerHTML = html`
     <h1>
       Max y-component of velocity (m/s):
       ${Math.max(...data.map((d) => d.velocity.y))}
+    </h1>
+    <h1>
+      Max y-component of acceleration (m/s^2):
+      ${Math.max(...data.map((d) => d.acceleration.y))}
     </h1>
   `;
 };
