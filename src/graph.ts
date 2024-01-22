@@ -66,12 +66,12 @@ export const makePlots = (
   const infoEl = findOrMakeEl("chart-info", app);
   infoEl.innerHTML = html`
     <h1>
-      Max y-component of velocity (m/s):
-      ${round(Math.max(...data.map((d) => d.velocity.y)))}
+      Max y-component of velocity:
+      ${round(Math.max(...data.map((d) => d.velocity.y)))} m/s
     </h1>
     <h1>
-      Max y-component of acceleration (m/s^2):
-      ${round(Math.max(...data.map((d) => d.acceleration.y)))}
+      Max y-component of acceleration:
+      ${round(Math.max(...data.map((d) => d.acceleration.y)))} m/s²
     </h1>
   `;
 };
