@@ -25,7 +25,7 @@ const createRange = () => {
 
 const run = async () => {
   try {
-    const wakeLock = await navigator.wakeLock.request("screen");
+    await navigator.wakeLock.request("screen");
   } catch (e) {
     msgEl.textContent += String(e);
   }
